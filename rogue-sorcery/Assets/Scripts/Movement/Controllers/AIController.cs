@@ -5,14 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AIController", menuName = "InputController/AIController")]
 public class AIController : InputController
 {
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private Transform enemyTrans;
+    public Transform playerTrans;
+    public Transform enemyTrans;
     public override float RetrieveMoveInput()
     {
-        //if (playerTrans.position.x > enemyTrans.position.x)
-        //{
-        //    return 1f;
-        //}
+        if (playerTrans != null && enemyTrans != null)
+        {
+            if (playerTrans.position.x > enemyTrans.position.x)
+            {
+                return 1f;
+            }
+        }
         return -1f;
     }
 

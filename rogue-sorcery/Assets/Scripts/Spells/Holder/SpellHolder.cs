@@ -4,7 +4,6 @@ public class SpellHolder : MonoBehaviour
 {
     public KeyCode hotkey;
     public Spell spell;
-    [SerializeField] private Transform playerTrans;
 
     private AbilityState state = AbilityState.READY;
 
@@ -16,14 +15,14 @@ public class SpellHolder : MonoBehaviour
             switch (state)
             {
                 case AbilityState.READY:
-                    if (Input.GetKeyDown(hotkey)) { state = spell.Cast(playerTrans); }
+                    if (Input.GetButton("Fire1")) { state = spell.Cast(transform); }
                     break;
                 case AbilityState.ACTIVE:
-                    if (Input.GetKey(hotkey)) { state = spell.Act(playerTrans); }
+                    if (Input.GetButton("Fire1")) { state = spell.Act(transform); }
                     else { state = AbilityState.READY; }
                     break;
                 case AbilityState.COOLDOWN:
-                    state = spell.Cooldown(playerTrans);
+                    state = spell.Cooldown(transform);
                     break;
             }
         }
