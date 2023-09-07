@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    private bool onGround;
-    private float friction;
+    public bool onGround { get; private set; }
+    public float friction { get; private set; }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -44,15 +44,5 @@ public class Ground : MonoBehaviour
         {
             friction = material.friction;
         }
-    }
-
-    public bool GetOnGround()
-    {
-        return onGround;
-    }
-
-    public float GetFriction()
-    {
-        return friction;
     }
 }

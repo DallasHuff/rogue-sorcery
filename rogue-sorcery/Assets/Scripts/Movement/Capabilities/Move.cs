@@ -4,45 +4,39 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] private InputController input = null;
+    [SerializeField] private Controller _controller = null;
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
     [SerializeField, Range(0f, 100f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f;
 
-    private Vector2 direction;
-    private Vector2 targetVelocity;
-    private Vector2 velocity;
-    private Rigidbody2D rb;
-    private Ground ground;
-    private SpriteRenderer sprite;
+    private Vector2 direction, targetVelocity, velocity;
+    private Rigidbody2D _body;
+    private Ground _ground;
 
-    private float maxSpeedChange;
-    private float acceleration;
+    private float inputFloat, maxSpeedChange, acceleration;
     private bool onGround;
-
     private bool lookingRight = true;
 
     // Start is called before the first frame update
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        ground = GetComponent<Ground>();
-        sprite = GetComponent<SpriteRenderer>();
+        _body = GetComponent<Rigidbody2D>();
+        _ground = GetComponent<Ground>();
+        _controller = GetComponent<Controller>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        direction.x = input.RetrieveMoveInput();
-        Debug.Log(direction.x);
-        Debug.Log(lookingRight);
+        inputFloat = _controller.input.RetrieveMoveInput();
+        direction.x = inputFloat;
 
-        if (direction.x > 0 && lookingRight == false || direction.x < 0 && lookingRight == true) 
+        if (inputFloat > 0 && lookingRight == false || inputFloat < 0 && lookingRight == true) 
         {
             Flip();
         }
 
-        targetVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0);
+        targetVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - _ground.friction, 0);
     }
 
     private void Flip()
@@ -53,14 +47,14 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        onGround = ground.GetOnGround();
-        velocity = rb.velocity;
+        onGround = _ground.onGround;
+        velocity = _body.velocity;
 
         acceleration = onGround ? maxAcceleration : maxAirAcceleration;
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, targetVelocity.x, maxSpeedChange);
 
-        rb.velocity = velocity;
+        _body.velocity = velocity;
     }
 
     public bool GetLookingRight()
