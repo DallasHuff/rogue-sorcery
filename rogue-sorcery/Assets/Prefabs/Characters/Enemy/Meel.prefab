@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6521612512806291338}
   - component: {fileID: 2319572372617536296}
-  - component: {fileID: 684431438740105462}
-  - component: {fileID: 8171522461668474303}
   - component: {fileID: 5235743151336331236}
   - component: {fileID: 6447706329465865815}
+  - component: {fileID: 5974077785563623259}
+  - component: {fileID: 3947761570999395904}
+  - component: {fileID: 8171522461668474303}
   m_Layer: 8
   m_Name: Meel
   m_TagString: Untagged
@@ -88,34 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &684431438740105462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640869454883891390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd04966393f50b49910b6973f7c200b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 7fe5388d83610a74b8b275367e12ef75, type: 2}
-  maxSpeed: 4
-  maxAcceleration: 35
-  maxAirAcceleration: 20
---- !u!114 &8171522461668474303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640869454883891390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cda8cf415cad7743aeab39f44bac72d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &5235743151336331236
 Rigidbody2D:
   serializedVersion: 4
@@ -153,3 +126,43 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &5974077785563623259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640869454883891390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c93f6cfdb58284597b8071af654636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 7fe5388d83610a74b8b275367e12ef75, type: 2}
+--- !u!114 &3947761570999395904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640869454883891390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b64ad85e4e27d47970492ab7ff1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 2
+  maxAcceleration: 35
+  maxAirAcceleration: 20
+--- !u!114 &8171522461668474303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640869454883891390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cda8cf415cad7743aeab39f44bac72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -35,7 +35,6 @@ public class Jump : MonoBehaviour
     void Update()
     {
         _desiredJump |= _controller.input.RetrieveJumpInput();
-        Debug.Log(Input.GetButton("Jump"));
     }
 
     private void FixedUpdate()
