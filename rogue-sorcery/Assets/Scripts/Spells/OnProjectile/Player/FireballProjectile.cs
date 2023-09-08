@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireballProjectile : MonoBehaviour
 {
-    private float lifeTime = 3f;
-    private float damage;
+    public float damage;
+    public float lifeTime = 3f;
     private Element damageType = Element.FIRE;
 
-    // Update is called once per frame
     void Update()
     {
         if (lifeTime < 0)
@@ -18,12 +15,13 @@ public class FireballProjectile : MonoBehaviour
         lifeTime -= Time.deltaTime;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        // layer 8 == "Enemy"
+        if (collision.gameObject.layer == 8)
         {
-            //EnemyStatBehavior eSB = collision.gameObject.GetComponentInParent<EnemyStatBehavior>();
-            //eSB.TakeDamage(damage, damageType);
+            EnemyStats eS = collision.gameObject.GetComponentInParent<EnemyStats>();
+            eS.TakeDamage(damage, damageType);
             Destroy(gameObject);
         }
     }

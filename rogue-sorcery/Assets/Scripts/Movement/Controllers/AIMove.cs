@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIMove : MonoBehaviour
@@ -38,7 +36,6 @@ public class AIMove : MonoBehaviour
         }
 
         direction.x = inputFloat;
-        Debug.Log(inputFloat);
         if (inputFloat > 0 && lookingRight == false || inputFloat < 0 && lookingRight == true)
         {
             Flip();
