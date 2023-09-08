@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
     [SerializeField, Range(0f, 100f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f;
+    [SerializeField] private TrailRenderer tr;
 
     private Vector2 direction, targetVelocity, velocity;
     private Rigidbody2D _body;
@@ -16,6 +17,16 @@ public class Move : MonoBehaviour
     private float inputFloat, maxSpeedChange, acceleration;
     private bool onGround;
     private bool lookingRight = true;
+
+    //Dashing
+    private bool canDash = true;
+    private bool isDashing;
+    [SerializeField]
+    private float dashingPower = 24f;
+    [SerializeField]
+    private float dashingTime = 0.2f;
+    [SerializeField]
+    private float dashingCooldown = 1f;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,6 +39,17 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+
         inputFloat = _controller.input.RetrieveMoveInput();
         direction.x = inputFloat;
 
@@ -37,6 +59,7 @@ public class Move : MonoBehaviour
         }
 
         targetVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - _ground.friction, 0);
+
     }
 
     private void Flip()
@@ -55,10 +78,31 @@ public class Move : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, targetVelocity.x, maxSpeedChange);
 
         _body.velocity = velocity;
+
+        if (isDashing)
+        {
+            return;
+        }
     }
 
     public bool GetLookingRight()
     {
         return lookingRight;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = _body.gravityScale;
+        _body.gravityScale = 0f;
+        _body.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        _body.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
