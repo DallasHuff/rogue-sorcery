@@ -25,6 +25,7 @@ public class FireballSpell : Spell
         {
             fireball.GetComponent<Rigidbody2D>().velocity = playerTrans.right * projectileSpeed;
         }
+        fireball.GetComponent<FireballProjectile>().damage = 10;
         return AbilityState.READY;
     }
 }

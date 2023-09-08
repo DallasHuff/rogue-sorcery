@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 8062308112092997102}
   - component: {fileID: 5892662713112462902}
   - component: {fileID: -6527170588054351290}
-  m_Layer: 0
+  - component: {fileID: 6085458472895434056}
+  - component: {fileID: 453361848698237568}
+  m_Layer: 12
   m_Name: fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +104,35 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &6085458472895434056
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752604950198406390}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &453361848698237568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752604950198406390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33ac3c1b6f035545a31646f037e473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
