@@ -8,6 +8,7 @@ public class PlayerController : InputController
     private PlayerInputActions _inputActions;
     private bool _isJumping;
     private bool _isDashing;
+    private bool _isCast2;
 
     private void OnEnable()
     {
@@ -17,6 +18,8 @@ public class PlayerController : InputController
         _inputActions.Player.Jump.canceled += JumpCanceled;
         _inputActions.Player.Dash.started += DashStarted;
         _inputActions.Player.Dash.canceled += DashCanceled;
+        _inputActions.Player.Cast2.started += Cast2Started;
+        _inputActions.Player.Cast2.canceled += Cast2Canceled;
     }
 
     private void OnDisable()
@@ -26,6 +29,8 @@ public class PlayerController : InputController
         _inputActions.Player.Jump.canceled -= JumpCanceled;
         _inputActions.Player.Dash.started -= DashStarted;
         _inputActions.Player.Dash.canceled -= DashCanceled;
+        _inputActions.Player.Cast2.started -= Cast2Started;
+        _inputActions.Player.Cast2.canceled -= Cast2Canceled;
         _inputActions = null;
     }
 
@@ -46,6 +51,16 @@ public class PlayerController : InputController
     {
         _isDashing = true;
     }
+
+    private void Cast2Started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        _isCast2 = true;
+    }
+    private void Cast2Canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        _isCast2 = false;
+    }
+
     public override float RetrieveMoveInput()
     {
         return _inputActions.Player.Move.ReadValue<Vector2>().x;
@@ -59,5 +74,9 @@ public class PlayerController : InputController
     public override bool RetrieveDashInput()
     {
         return _isDashing;
+    }
+    public override bool RetrieveCast2Input()
+    {
+        return _isCast2;
     }
 }
