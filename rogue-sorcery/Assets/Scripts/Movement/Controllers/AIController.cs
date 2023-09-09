@@ -24,8 +24,8 @@ public class AIController : InputController
         return true;
     }
 
-    public override bool RetrieveJumpHoldInput()
+    public override bool RetrieveDashInput()
     {
-        return false;
+        return true;
     }
 }
