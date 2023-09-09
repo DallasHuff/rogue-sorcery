@@ -849,6 +849,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4458008066948628010, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
+      propertyPath: _maxAirJumps
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5506034710118059024, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
       propertyPath: m_Name
       value: PlayerRender
@@ -892,6 +896,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5506034710118059024, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
       insertIndex: -1
       addedObject: {fileID: 789688010}
+    - targetCorrespondingSourceObject: {fileID: 5506034710118059024, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789688021}
   m_SourcePrefab: {fileID: 100100000, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
 --- !u!1001 &7155287364547496990
 PrefabInstance:
@@ -1038,7 +1045,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91491e4536fc91947b290f40e5e3384c, type: 3}
-
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
