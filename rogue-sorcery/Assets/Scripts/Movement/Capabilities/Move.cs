@@ -44,7 +44,7 @@ public class Move : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (_controller.input.RetrieveDashInput() && canDash)
         {
             StartCoroutine(Dash());
         }
