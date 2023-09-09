@@ -14,7 +14,7 @@ public class GlacialSpikeSpell : Spell
 
     public override AbilityState Cast(Transform playerTrans)
     {
-        GameObject GlacialSpike = Instantiate(GlacialSpikeGO, playerTrans.position + playerTrans.right, Quaternion.identity);
+        GameObject GlacialSpike = Instantiate(GlacialSpikeGO, playerTrans.position, Quaternion.identity);
         // looking left
         if (playerTrans.localScale.x < 0)
         {
@@ -25,7 +25,9 @@ public class GlacialSpikeSpell : Spell
         {
             GlacialSpike.GetComponent<Rigidbody2D>().velocity = playerTrans.right * projectileSpeed;
         }
-        GlacialSpike.GetComponent<GlacialSpikeProjectile>().damage = 10;
-        return AbilityState.READY;
+
+        currCD = cooldownTime;
+        GlacialSpike.GetComponent<GlacialSpikeProjectile>().damage = damage;
+        return AbilityState.COOLDOWN;
     }
 }
