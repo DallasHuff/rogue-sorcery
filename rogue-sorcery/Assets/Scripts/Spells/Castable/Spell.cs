@@ -11,6 +11,7 @@ public class Spell : ScriptableObject
     public float currCD;
     public float activeTime;
     private float currActiveTime;
+    public float knockbackForce;
 
     public virtual AbilityState Cast(Transform playerTrans) { return AbilityState.READY; }
 

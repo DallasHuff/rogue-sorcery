@@ -26,8 +26,11 @@ public class GlacialSpikeSpell : Spell
             GlacialSpike.GetComponent<Rigidbody2D>().velocity = playerTrans.right * projectileSpeed;
         }
 
+        GlacialSpikeProjectile gsComponent = GlacialSpike.GetComponent<GlacialSpikeProjectile>();
+        gsComponent.damage = damage;
+        gsComponent.knockbackForce = knockbackForce;
+
         currCD = cooldownTime;
-        GlacialSpike.GetComponent<GlacialSpikeProjectile>().damage = damage;
         return AbilityState.COOLDOWN;
     }
 }

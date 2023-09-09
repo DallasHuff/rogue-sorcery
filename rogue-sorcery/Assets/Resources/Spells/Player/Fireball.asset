@@ -15,8 +15,22 @@ MonoBehaviour:
   spellName: Fireball
   description: 
   baseCooldownTime: 0
-  cooldownTime: 0
+  cooldownTime: 1
+  currCD: -0.0011998606
   activeTime: 0
+  knockback: 0
   fireballGO: {fileID: 8752604950198406390, guid: 107bcc7da7d847f47bd36bcd56eacd3c, type: 3}
-  damage: 0
-  projectileSpeed: 1
+  damage: 10
+  projectileSpeed: 10
+  damageStat:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  fireDamageStat:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  projectileSpeedStat:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}

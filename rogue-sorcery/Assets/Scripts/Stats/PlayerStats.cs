@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable
 {
     [SerializeField] private FloatReference maxHealth;          // modified by flat amount
     [SerializeField] private FloatReference currentHealth;
@@ -15,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private FloatReference airDamage;          // modified by %
     [SerializeField] private FloatReference lightningDamage;    // modified by %
 
+    private Rigidbody2D _body;
+
 
     /*
      * possible additional stats:
@@ -23,9 +25,36 @@ public class PlayerStats : MonoBehaviour
      * intelligence (increases number of spells you can hold)
     */
 
-    private void Start()
+    private void Awake()
     {
-        //Inventory.instance.onItemPickup += onItemPickup;
+        _body = GetComponent<Rigidbody2D>();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            TakeDamage(10, Element.FIRE);
+        }
+    }
+
+    private void Die()
+    {
+        //TODO: Do something when player dies
+        Debug.Log("player died");
+    }
+
+    public void TakeDamage(float damage, Vector2 knockback, Element damageType)
+    {
+        damage = Mathf.Clamp(damage, 0, float.MaxValue);
+        currentHealth.Variable.Value -= damage;
+
+        _body.AddForce(knockback, ForceMode2D.Impulse);
+
+        if (currentHealth.Value <= 0)
+        {
+            Die();
+        }
     }
 
     public void TakeDamage(float damage, Element damageType)
@@ -39,17 +68,14 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void TakeDamage(float damage)
     {
-        //TODO: Do something when player dies
-        Debug.Log("player died");
-    }
+        damage = Mathf.Clamp(damage, 0, float.MaxValue);
+        currentHealth.Variable.Value -= damage;
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (currentHealth.Value <= 0)
         {
-            TakeDamage(10, Element.FIRE);
+            Die();
         }
     }
 }

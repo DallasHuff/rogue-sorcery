@@ -26,7 +26,10 @@ public class FireballSpell : Spell
             fireball.GetComponent<Rigidbody2D>().velocity = playerTrans.right * projectileSpeed;
         }
 
-        fireball.GetComponent<FireballProjectile>().damage = damage;
+        FireballProjectile fbpComponent = fireball.GetComponent<FireballProjectile>();
+        fbpComponent.damage = damage;
+        fbpComponent.knockbackForce = knockbackForce;
+
         currCD = cooldownTime;
         return AbilityState.COOLDOWN;
     }
