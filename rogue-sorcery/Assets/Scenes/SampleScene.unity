@@ -624,6 +624,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &789688021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789687997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e5fcb668dd5e549be91938d7d23c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 0}
+  spell: {fileID: 11400000, guid: 71cf00d0b30775e4890048ae4a395c4f, type: 2}
 --- !u!1 &828068662
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +853,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRender
       objectReference: {fileID: 0}
+    - target: {fileID: 8013618625958935099, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 11400000, guid: ceb41831575bd114691ae9376f8bb47d, type: 2}
+    - target: {fileID: 8013618625958935099, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
+      propertyPath: hotkey
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8166680593702551488, guid: 0a0d46a3bd3abf64282fbaf716318a61, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1016,6 +1038,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91491e4536fc91947b290f40e5e3384c, type: 3}
+
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

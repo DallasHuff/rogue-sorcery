@@ -1,13 +1,18 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class SpellHolder : MonoBehaviour
+public class SpellHolder2 : MonoBehaviour
 {
-    public KeyCode hotkey;
+    [SerializeField] private Controller _controller = null;
     public Spell spell;
-    private bool _isCast2;
+
 
     private AbilityState state = AbilityState.READY;
 
+    private void Awake()
+    {
+        _controller = GetComponent<Controller>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -16,10 +21,10 @@ public class SpellHolder : MonoBehaviour
             switch (state)
             {
                 case AbilityState.READY:
-                    if (Input.GetButton("Fire1")) { state = spell.Cast(transform); }
+                    if (_controller.input.RetrieveCast2Input()) { state = spell.Cast(transform); }
                     break;
                 case AbilityState.ACTIVE:
-                    if (Input.GetButton("Fire1")) { state = spell.Act(transform); }
+                    if (_controller.input.RetrieveCast2Input()) { state = spell.Act(transform); }
                     else { state = AbilityState.READY; }
                     break;
                 case AbilityState.COOLDOWN:

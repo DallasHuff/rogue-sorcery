@@ -28,4 +28,9 @@ public class AIController : InputController
     {
         return true;
     }
+
+    public override bool RetrieveCast2Input()
+    {
+        return true;
+    }
 }
