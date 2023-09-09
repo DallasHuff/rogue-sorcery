@@ -8,7 +8,7 @@ public class Spell : ScriptableObject
     public string description;
     public float baseCooldownTime;
     public float cooldownTime;
-    private float currCD;
+    public float currCD;
     public float activeTime;
     private float currActiveTime;
 

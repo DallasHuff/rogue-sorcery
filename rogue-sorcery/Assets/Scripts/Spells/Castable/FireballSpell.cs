@@ -14,7 +14,7 @@ public class FireballSpell : Spell
 
     public override AbilityState Cast(Transform playerTrans)
     {
-        GameObject fireball = Instantiate(fireballGO, playerTrans.position + playerTrans.right, Quaternion.identity);
+        GameObject fireball = Instantiate(fireballGO, playerTrans.position, Quaternion.identity);
         // looking left
         if (playerTrans.localScale.x < 0)
         {
@@ -25,7 +25,9 @@ public class FireballSpell : Spell
         {
             fireball.GetComponent<Rigidbody2D>().velocity = playerTrans.right * projectileSpeed;
         }
-        fireball.GetComponent<FireballProjectile>().damage = 10;
-        return AbilityState.READY;
+
+        fireball.GetComponent<FireballProjectile>().damage = damage;
+        currCD = cooldownTime;
+        return AbilityState.COOLDOWN;
     }
 }
