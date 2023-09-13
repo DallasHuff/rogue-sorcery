@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour, IDamageable
 {
-    //public Director d;
+    [SerializeField] private EnemyHealthbar healthbar;
     [SerializeField] private FloatVariable maxHealth, damage, armor, speed, projectileSpeed;
     private Rigidbody2D _body;
 
@@ -21,6 +21,8 @@ public class EnemyStats : MonoBehaviour, IDamageable
         projectileSpd = projectileSpeed.Value;
 
         _body = GetComponent<Rigidbody2D>();
+
+        healthbar.SetHealth(currentHealth, maxHealth.Value);
     }
 
     void Die()
@@ -33,6 +35,8 @@ public class EnemyStats : MonoBehaviour, IDamageable
     {
         damage = Mathf.Clamp(damage, 0, float.MaxValue);
         currentHealth -= damage;
+
+        healthbar.SetHealth(currentHealth, maxHealth.Value);
 
         _body.AddForce(knockback, ForceMode2D.Impulse);
 
