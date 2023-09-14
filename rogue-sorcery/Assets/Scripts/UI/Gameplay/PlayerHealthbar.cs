@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Healthbar : MonoBehaviour
+public class PlayerHealthbar : MonoBehaviour
 {
     [SerializeField] private FloatReference Variable, Max;
     [SerializeField] private Slider slider;

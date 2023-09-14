@@ -16,9 +16,9 @@ MonoBehaviour:
   description: 
   baseCooldownTime: 0
   cooldownTime: 1
-  currCD: -0.0011998606
+  currCD: -0.0007199843
   activeTime: 0
-  knockback: 0
+  knockbackForce: 30
   fireballGO: {fileID: 8752604950198406390, guid: 107bcc7da7d847f47bd36bcd56eacd3c, type: 3}
   damage: 10
   projectileSpeed: 10
