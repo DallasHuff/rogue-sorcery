@@ -63,7 +63,7 @@ public class StateMachine : MonoBehaviour
 
     }
 
-
+    /*
     private void OnValidate()
     {
         if (mainStateType == null)
@@ -73,5 +73,5 @@ public class StateMachine : MonoBehaviour
                 mainStateType = new IdleCombatState();
             }
         }
-    }
+    }*/
 }
