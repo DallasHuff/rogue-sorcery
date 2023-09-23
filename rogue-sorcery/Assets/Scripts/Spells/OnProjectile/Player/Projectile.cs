@@ -1,4 +1,5 @@
 using UnityEngine;
+using Rogue.Combat.Damage;
 
 public class Projectile : MonoBehaviour
 {
@@ -20,14 +21,14 @@ public class Projectile : MonoBehaviour
         // layer 8 == "Enemy"
         if (other.gameObject.layer == 8)
         {
-            IDamageable damageable = other.gameObject.GetComponentInParent<EnemyStats>();
-            if (damageable != null)
-            {
-                Vector2 direction = (other.transform.position - transform.position).normalized;
-                Vector2 knockback = direction * knockbackForce;
-                damageable.TakeDamage(damage, knockback, damageType);
-                Destroy(gameObject);
-            }
+            //IDamageable damageable = other.gameObject.GetComponentInParent<EnemyStats>();
+            //if (damageable != null)
+            //{
+            //    Vector2 direction = (other.transform.position - transform.position).normalized;
+            //    Vector2 knockback = direction * knockbackForce;
+            //    damageable.TakeDamage(damage, knockback, damageType);
+            //    Destroy(gameObject);
+            //}
 
         }
     }
