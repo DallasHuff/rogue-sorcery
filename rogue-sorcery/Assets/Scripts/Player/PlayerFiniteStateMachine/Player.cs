@@ -1,44 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
+using Rogue.CoreSystem;
+using Rogue.Spell;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     #region State Variables
-    public PlayerStateMachine StateMachine {  get; private set; }
+    public PlayerStateMachine StateMachine { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
+    public PlayerWallSlideState WallSlideState { get; private set; }
+    public PlayerWallGrabState WallGrabState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerLedgeClimbState LedgeClimbState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerAttackState PrimaryAttackState { get; private set; }
+    public PlayerAttackState SecondaryAttackState { get; private set; }
+
+    public PlayerStunState PlayerStunState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
     #endregion
+
     #region Components
+    public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    #endregion
-    #region Check Transforms
+    public Transform DashDirectionIndicator { get; private set; }
+    public BoxCollider2D MovementCollider { get; private set; }
 
-    [SerializeField]
-    private Transform groundCheck;
+    public Stats Stats { get; private set; }
+
+    public InteractableDetector InteractableDetector { get; private set; }
     #endregion
 
-    #region Other Vars
-    public Vector2 CurrentVelocity { get; private set; }
-    public int FacingDirection { get; private set; }
+    #region Other Variables         
+
     private Vector2 workspace;
+
+    private Spell spellOne;
+    private Spell spellTwo;
+
     #endregion
-
-
-
 
     #region Unity Callback Functions
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+
+        spellOne = transform.Find("SpellOne").GetComponent<Spell>();
+        spellTwo = transform.Find("SpellTwo").GetComponent<Spell>();
+
+        spellOne.SetCore(Core);
+        spellTwo.SetCore(Core);
+
+        Stats = Core.GetCoreComponent<Stats>();
+        InteractableDetector = Core.GetCoreComponent<InteractableDetector>();
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -46,23 +69,40 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimbState");
+        DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", spellOne, CombatInputs.one);
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", spellTwo, CombatInputs.two);
+        PlayerStunState = new PlayerStunState(this, StateMachine, playerData, "stun");
     }
 
     private void Start()
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        RB = GetComponent<Rigidbody2D>();
 
-        FacingDirection = 1;
+        InputHandler.OnInteractInputChanged += InteractableDetector.TryInteract;
+
+        RB = GetComponent<Rigidbody2D>();
+        DashDirectionIndicator = transform.Find("DashDirectionIndicator");
+        MovementCollider = GetComponent<BoxCollider2D>();
+
+        Stats.Poise.OnCurrentValueZero += HandlePoiseCurrentValueZero;
 
         StateMachine.Initialize(IdleState);
     }
 
+    private void HandlePoiseCurrentValueZero()
+    {
+        StateMachine.ChangeState(PlayerStunState);
+    }
+
     private void Update()
     {
-        CurrentVelocity = RB.velocity;
+        Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -70,51 +110,31 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
-    #endregion
-    #region Set Functions
-    public void SetVelocityX(float velocity)
+
+    private void OnDestroy()
     {
-        workspace.Set(velocity, CurrentVelocity.y);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
+        Stats.Poise.OnCurrentValueZero -= HandlePoiseCurrentValueZero;
     }
 
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
     #endregion
-    #region Check Functions
-    public bool CheckIfGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
-    public void CheckIfShouldFlip(int xInput)
-    {
-        if (xInput != 0 && xInput != FacingDirection)
-        {
-            Flip();
-        }
-    }
-    #endregion
+
     #region Other Functions
 
-    private void AnimationTrigger()
+    public void SetColliderHeight(float height)
     {
-        StateMachine.CurrentState.AnimationTrigger();
+        Vector2 center = MovementCollider.offset;
+        workspace.Set(MovementCollider.size.x, height);
+
+        center.y += (height - MovementCollider.size.y) / 2;
+
+        MovementCollider.size = workspace;
+        MovementCollider.offset = center;
     }
 
-    private void AnimationFinishTrigger()
-    {
-        StateMachine.CurrentState.AnimationFinishTrigger();
-    }
+    private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
-    private void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
-    }
+    private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+
     #endregion
 }
