@@ -56,6 +56,10 @@ public class Player : MonoBehaviour
         spellOne = transform.Find("SpellOne").GetComponent<Spell>();
         spellTwo = transform.Find("SpellTwo").GetComponent<Spell>();
 
+        if (spellOne is null)
+        {
+            Debug.Log("spellone is null!!!!!!!!!!");
+        }
         spellOne.SetCore(Core);
         spellTwo.SetCore(Core);
 
