@@ -1123,29 +1123,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2852851328532632452, guid: f287aaa971d433844a192e93f14142c4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1067712496085392160}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f287aaa971d433844a192e93f14142c4, type: 3}
---- !u!1 &2830777994189913685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2852851328532632452, guid: f287aaa971d433844a192e93f14142c4, type: 3}
-  m_PrefabInstance: {fileID: 62958849696394705}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1067712496085392160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2830777994189913685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f4b650cdf5b2645a5062deb1287f09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCounterResetCooldown: 1
 --- !u!4 &4929793946018752015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4951014844427881438, guid: f287aaa971d433844a192e93f14142c4, type: 3}
@@ -1162,6 +1141,10 @@ PrefabInstance:
     - target: {fileID: 2852851328532632452, guid: f287aaa971d433844a192e93f14142c4, type: 3}
       propertyPath: m_Name
       value: SpellTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811746157698711904, guid: f287aaa971d433844a192e93f14142c4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4951014844427881438, guid: f287aaa971d433844a192e93f14142c4, type: 3}
       propertyPath: m_LocalPosition.x

@@ -56,10 +56,6 @@ public class Player : MonoBehaviour
         spellOne = transform.Find("SpellOne").GetComponent<Spell>();
         spellTwo = transform.Find("SpellTwo").GetComponent<Spell>();
 
-        if (spellOne is null)
-        {
-            Debug.Log("spellone is null!!!!!!!!!!");
-        }
         spellOne.SetCore(Core);
         spellTwo.SetCore(Core);
 
@@ -137,7 +133,7 @@ public class Player : MonoBehaviour
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
-    private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
 
     #endregion

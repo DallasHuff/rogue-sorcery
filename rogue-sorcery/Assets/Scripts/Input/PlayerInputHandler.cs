@@ -71,6 +71,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             AttackInputs[(int)CombatInputs.one] = false;
         }
+
     }
 
     public void OnSecondaryAttackInput(InputAction.CallbackContext context)
@@ -92,7 +93,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
         NormInputY = Mathf.RoundToInt(RawMovementInput.y);
-
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
