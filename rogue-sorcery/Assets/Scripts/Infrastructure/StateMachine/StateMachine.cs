@@ -29,6 +29,10 @@ public class StateMachine : MonoBehaviour
             CurrentState.OnExit();
         }
         CurrentState = _newState;
+        // start log code
+        Debug.Log(CurrentState.GetType().Name);
+
+
         CurrentState.OnEnter(this);
     }
 
