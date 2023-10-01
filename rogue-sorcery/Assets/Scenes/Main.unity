@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 1275346451}
   - component: {fileID: 1275346450}
   - component: {fileID: 1275346449}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5446,9 +5446,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1067712496085392160, guid: 79e0fd7e887ce6546b807f8887956cdf, type: 3}
-    - {fileID: 4957968933540111707, guid: 79e0fd7e887ce6546b807f8887956cdf, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

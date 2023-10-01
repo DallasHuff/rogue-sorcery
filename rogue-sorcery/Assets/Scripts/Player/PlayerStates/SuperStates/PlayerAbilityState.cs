@@ -33,7 +33,7 @@ public class PlayerAbilityState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        Debug.Log("PlayerAbilityState enter");
         isAbilityDone = false;
     }
 
